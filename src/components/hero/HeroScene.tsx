@@ -125,19 +125,18 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[115vh] w-full overflow-hidden bg-[#FAF9F5] flex flex-col justify-between pt-24 md:pt-32 pb-16"
+      className="relative min-h-[115vh] w-full overflow-hidden bg-transparent flex flex-col justify-between pt-24 md:pt-32 pb-16"
       style={{ perspective: "1200px" }}
     >
-      {/* Background Architectural Grid & Ambient Light */}
+      {/* Background Clean Ambient Light */}
       <div
         className="absolute inset-0 pointer-events-none transition-transform duration-75 ease-out"
         style={{
           transform: `translate3d(0, ${bgTranslateY}px, 0)`,
         }}
       >
-        <div className="absolute inset-0 bg-radial-grid-light opacity-80" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-h3d-blue/8 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-[#FAF9F5] via-[#FAF9F5]/80 to-transparent z-10" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-h3d-blue/6 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-64 bg-gradient-to-t from-white via-white/80 to-transparent z-10" />
       </div>
 
       {/* Hero Header Typography */}

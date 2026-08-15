@@ -10,18 +10,18 @@
   --font-mono: 'JetBrains Mono', monospace;
   --font-title: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* White & Warm Off-White Theme Tokens */
-  --color-background: #FAF9F5;
+  /* Clean Pure White Theme Tokens */
+  --color-background: #FFFFFF;
   --color-surface-white: #FFFFFF;
-  --color-surface-muted: #F2F0E8;
+  --color-surface-muted: #F8FAFC;
   --color-surface-card: #FFFFFF;
   
   --color-dark: #0A0B0E;
   --color-dark-muted: #4A4E5C;
   --color-h3d-blue: #0F52FF;
   --color-h3d-blue-glow: #2868FF;
-  --color-border-light: rgba(10, 11, 14, 0.08);
-  --color-border-medium: rgba(10, 11, 14, 0.14);
+  --color-border-light: rgba(10, 11, 14, 0.06);
+  --color-border-medium: rgba(10, 11, 14, 0.12);
 
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
@@ -73,15 +73,15 @@ html.lenis, html.lenis body {
 
 /* Custom Clean Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF9F5;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D2C7;
+  background: #E2E8F0;
   border-radius: 4px;
 }
 
@@ -102,26 +102,13 @@ html.lenis, html.lenis body {
   font-family: var(--font-mono);
 }
 
-.bg-radial-grid-light {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(10, 11, 14, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(10, 11, 14, 0.04) 1px, transparent 1px);
-}
-
-.bg-radial-grid-dark {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-}
-
 /* Custom Billboard Shadow & Glare */
 .billboard-light-shadow {
-  box-shadow: 0 30px 80px -15px rgba(10, 11, 14, 0.2), 0 0 40px -10px rgba(15, 82, 255, 0.15);
+  box-shadow: 0 30px 80px -15px rgba(10, 11, 14, 0.15), 0 0 40px -10px rgba(15, 82, 255, 0.12);
 }
 
 .text-stroke-dark {
   -webkit-text-stroke: 1px rgba(10, 11, 14, 0.25);
   color: transparent;
 }
+

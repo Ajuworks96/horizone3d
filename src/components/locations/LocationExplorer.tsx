@@ -16,13 +16,10 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
     H3D_DATA.locations.find((l) => l.id === selectedLocId) || H3D_DATA.locations[0];
 
   return (
-    <section id="locations" className="relative bg-[#FFFFFF] py-24 sm:py-32 border-t border-black/[0.08] overflow-hidden">
-      {/* Background Subtle Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5]/60 via-white to-[#FAF9F5]/40 pointer-events-none" />
-
+    <section id="locations" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.08]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.06]">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-h3d-blue/10 text-xs font-semibold text-h3d-blue uppercase tracking-wider">
               <MapPin className="w-3.5 h-3.5" />
@@ -58,12 +55,12 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
                 className={`group p-4 rounded-xl text-left transition-all duration-300 border flex flex-col justify-between relative overflow-hidden ${
                   isSelected
                     ? "bg-[#0A0B0E] text-white border-[#0A0B0E] shadow-lg shadow-black/15 -translate-y-0.5"
-                    : "bg-[#FAF9F5] hover:bg-white text-[#2D3139] border-black/[0.08] hover:border-black/20"
+                    : "bg-[#F8FAFC] hover:bg-white text-[#2D3139] border-black/[0.06] hover:border-black/20"
                 }`}
               >
                 <div className="space-y-1">
                   <div className={`text-[10px] font-bold tracking-wider uppercase ${
-                    isSelected ? "text-h3d-blue-glow" : "text-[#6B7280]"
+                    isSelected ? "text-blue-400" : "text-[#6B7280]"
                   }`}>
                     {loc.tag}
                   </div>
@@ -84,7 +81,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
         </div>
 
         {/* Main Showcase Banner for Selected Location */}
-        <div className="bg-[#FAF9F5] border border-black/[0.08] rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-12 items-stretch">
+        <div className="bg-white border border-black/[0.08] rounded-2xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-12 items-stretch">
           {/* Left / Hero: Real Location Photo with Atmosphere */}
           <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[440px] lg:min-h-[500px] overflow-hidden group">
             <Image
@@ -137,7 +134,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
 
               {/* Real Stats Grid */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-4 rounded-xl bg-[#FAF9F5] border border-black/[0.06] space-y-1">
+                <div className="p-4 rounded-xl bg-[#F8FAFC] border border-black/[0.06] space-y-1">
                   <div className="flex items-center gap-1.5 text-xs text-[#6B7280] font-medium">
                     <Users className="w-4 h-4 text-h3d-blue" />
                     <span>Daily Reach</span>
@@ -147,7 +144,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#FAF9F5] border border-black/[0.06] space-y-1">
+                <div className="p-4 rounded-xl bg-[#F8FAFC] border border-black/[0.06] space-y-1">
                   <div className="flex items-center gap-1.5 text-xs text-[#6B7280] font-medium">
                     <Clock className="w-4 h-4 text-emerald-600" />
                     <span>Dwell Exposure</span>
@@ -167,7 +164,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
                   {currentLocation.mediaAvailable.map((media, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FAF9F5] border border-black/[0.08] text-xs font-medium text-[#0A0B0E]"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-black/[0.08] text-xs font-medium text-[#0A0B0E]"
                     >
                       <CheckCircle2 className="w-3.5 h-3.5 text-h3d-blue shrink-0" />
                       <span>{media}</span>

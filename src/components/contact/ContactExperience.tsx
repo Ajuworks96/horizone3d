@@ -36,23 +36,19 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
   };
 
   return (
-    <section id="contact" className="relative bg-[#FAF9F5] py-24 sm:py-32 border-t border-black/[0.08] overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-h3d-blue/8 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-grid-light opacity-50 pointer-events-none" />
-
+    <section id="contact" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Master Call to Action Statement */}
         <div className="max-w-4xl mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-black/[0.04] border border-black/[0.08] text-[11px] font-mono text-h3d-blue uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-h3d-blue/10 text-xs font-semibold text-h3d-blue uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-h3d-blue" />
-            <span>OPERATIONS & CAMPAIGN DESK</span>
+            <span>Operations & Campaign Desk</span>
           </div>
 
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-[#0A0B0E] tracking-tight uppercase leading-[0.98]">
-            PUT YOUR BRAND <br />
+            Put Your Brand <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-h3d-blue via-blue-600 to-[#0A0B0E]">
-              IN THE RIGHT PLACE.
+              In The Right Place.
             </span>
           </h2>
 
@@ -68,10 +64,10 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
             {/* Email Card */}
             <a
               href={`mailto:${H3D_DATA.company.email}`}
-              className="block p-6 rounded-lg bg-white border border-black/[0.08] hover:border-h3d-blue/50 transition-all group shadow-sm hover:shadow-md"
+              className="block p-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.06] hover:border-h3d-blue/50 transition-all group shadow-sm hover:shadow-lg"
             >
-              <div className="flex items-center justify-between text-xs font-mono text-[#6B7280] mb-2">
-                <span>DIRECT EMAIL DESK</span>
+              <div className="flex items-center justify-between text-xs font-semibold text-[#6B7280] mb-2 uppercase tracking-wider">
+                <span>Direct Email Desk</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:text-h3d-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
               <div className="text-lg sm:text-xl font-mono font-bold text-[#0A0B0E] group-hover:text-h3d-blue transition-colors">
@@ -85,10 +81,10 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
             {/* Phone / WhatsApp Card */}
             <a
               href={`tel:${H3D_DATA.company.phone.replace(/\s+/g, '')}`}
-              className="block p-6 rounded-lg bg-white border border-black/[0.08] hover:border-h3d-blue/50 transition-all group shadow-sm hover:shadow-md"
+              className="block p-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.06] hover:border-h3d-blue/50 transition-all group shadow-sm hover:shadow-lg"
             >
-              <div className="flex items-center justify-between text-xs font-mono text-[#6B7280] mb-2">
-                <span>PHONE & WHATSAPP</span>
+              <div className="flex items-center justify-between text-xs font-semibold text-[#6B7280] mb-2 uppercase tracking-wider">
+                <span>Phone & WhatsApp</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:text-h3d-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
               <div className="text-lg sm:text-xl font-mono font-bold text-[#0A0B0E] group-hover:text-h3d-blue transition-colors">
@@ -100,7 +96,7 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
             </a>
 
             {/* Municipal Hub Territory */}
-            <div className="p-6 rounded-xl bg-white border border-black/[0.08] space-y-1.5 shadow-sm">
+            <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.06] space-y-1.5 shadow-sm">
               <div className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">OPERATIONAL BASE</div>
               <div className="text-base sm:text-lg font-display font-bold text-[#0A0B0E]">
                 Guruvayur Municipality, Kerala
@@ -113,69 +109,69 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
             {/* Interactive Campaign Planner Button */}
             <button
               onClick={onOpenCampaignModal}
-              className="w-full py-4 px-6 bg-h3d-blue hover:bg-blue-600 text-white rounded font-mono text-xs font-bold tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(15,82,255,0.3)] transition-all"
+              className="w-full py-4 px-6 bg-h3d-blue hover:bg-blue-600 text-white rounded-xl font-semibold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transition-all active:scale-[0.99]"
             >
-              <span>LAUNCH FULL CAMPAIGN CONFIGURATOR</span>
+              <span>Launch Campaign Planner</span>
               <ArrowUpRight className="w-4 h-4" />
             </button>
           </div>
 
           {/* Right Column: Direct Inquiry Message Box */}
-          <div className="lg:col-span-7 bg-white border border-black/[0.08] rounded-lg p-6 sm:p-8 shadow-md">
-            <div className="flex items-center justify-between pb-4 border-b border-black/[0.08] mb-6">
-              <div className="text-xs font-mono text-h3d-blue font-bold uppercase tracking-wider">
-                RAPID MEDIA INQUIRY FORM
+          <div className="lg:col-span-7 bg-white border border-black/[0.08] rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl">
+            <div className="flex items-center justify-between pb-4 border-b border-black/[0.06] mb-6">
+              <div className="text-xs font-bold text-h3d-blue uppercase tracking-wider">
+                Direct Media Inquiry Form
               </div>
-              <div className="text-[10px] font-mono text-[#6B7280]">DIRECT TO H3D DESK</div>
+              <div className="text-xs font-sans text-[#6B7280]">Direct to H3D Desk</div>
             </div>
 
             {!formSent ? (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Full Name</label>
+                    <label className="text-xs font-semibold text-[#4A4E5C]">Full Name</label>
                     <input
                       type="text"
                       required
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                      className="w-full bg-[#F8FAFC] border border-black/10 rounded px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Brand / Agency</label>
+                    <label className="text-xs font-semibold text-[#4A4E5C]">Brand / Agency</label>
                     <input
                       type="text"
                       required
                       placeholder="Company Name"
                       value={formData.org}
                       onChange={(e) => setFormData({ ...formData, org: e.target.value })}
-                      className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                      className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3.5 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Contact Phone / WhatsApp</label>
+                  <label className="text-xs font-semibold text-[#4A4E5C]">Contact Phone / WhatsApp</label>
                   <input
                     type="tel"
                     required
                     placeholder="+91 99478 34661"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2.5 text-xs font-mono text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                    className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3.5 py-2.5 text-xs font-mono text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Campaign Requirements & Target Sites</label>
+                  <label className="text-xs font-semibold text-[#4A4E5C]">Campaign Requirements & Target Sites</label>
                   <textarea
                     rows={3}
                     placeholder="Provide details on your desired formats (LED screen, large billboard, bus shelters) and planned timing..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                    className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3.5 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                   />
                 </div>
 

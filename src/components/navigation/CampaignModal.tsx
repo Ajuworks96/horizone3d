@@ -112,18 +112,18 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
                       type="button"
                       key={format.id}
                       onClick={() => toggleFormat(format.id)}
-                      className={`flex items-center justify-between p-3 rounded-md text-left transition-all border ${
+                      className={`flex items-center justify-between p-3.5 rounded-xl text-left transition-all border ${
                         isSelected
                           ? "bg-h3d-blue/10 border-h3d-blue text-[#0A0B0E] shadow-sm font-semibold"
-                          : "bg-[#FAF9F5] border-black/[0.08] text-[#4A4E5C] hover:bg-white hover:text-[#0A0B0E]"
+                          : "bg-[#F8FAFC] border-black/[0.06] text-[#4A4E5C] hover:bg-white hover:text-[#0A0B0E]"
                       }`}
                     >
                       <div className="pr-2">
                         <div className="text-xs font-bold font-display tracking-wide">{format.name}</div>
-                        <div className="text-[10px] font-mono text-[#6B7280]">{format.category} Media</div>
+                        <div className="text-[10px] font-sans text-[#6B7280]">{format.category} Media</div>
                       </div>
                       <div
-                        className={`w-4 h-4 rounded-sm flex items-center justify-center border ${
+                        className={`w-4 h-4 rounded-md flex items-center justify-center border ${
                           isSelected ? "bg-h3d-blue border-h3d-blue text-white" : "border-black/20 bg-white"
                         }`}
                       >
@@ -137,7 +137,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
 
             {/* Step 2: Target Location / Zone */}
             <div className="space-y-3">
-              <label className="text-xs font-mono font-bold tracking-wider text-[#0A0B0E] uppercase flex items-center gap-2">
+              <label className="text-xs font-semibold tracking-wider text-[#0A0B0E] uppercase flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-h3d-blue" />
                 <span>2. Target Municipal Zone</span>
               </label>
@@ -155,10 +155,10 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
                       type="button"
                       key={zone}
                       onClick={() => setSelectedZone(zone)}
-                      className={`p-3 rounded-md text-left transition-all border flex items-center justify-between ${
+                      className={`p-3.5 rounded-xl text-left transition-all border flex items-center justify-between ${
                         isSelected
                           ? "bg-h3d-blue/10 border-h3d-blue text-[#0A0B0E] shadow-sm font-semibold"
-                          : "bg-[#FAF9F5] border-black/[0.08] text-[#4A4E5C] hover:bg-white hover:text-[#0A0B0E]"
+                          : "bg-[#F8FAFC] border-black/[0.06] text-[#4A4E5C] hover:bg-white hover:text-[#0A0B0E]"
                       }`}
                     >
                       <span className="text-xs font-medium font-sans">{zone}</span>
@@ -178,14 +178,14 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
             {/* Step 3: Campaign Duration & Brand Info */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-[#4A4E5C] font-semibold flex items-center gap-1.5">
+                <label className="text-xs font-semibold text-[#4A4E5C] flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5 text-h3d-blue" />
                   <span>Duration</span>
                 </label>
                 <select
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
-                  className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2 text-xs font-mono text-[#0A0B0E] focus:outline-none focus:border-h3d-blue"
+                  className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue"
                 >
                   <option value="15 Days (High-Burst)">15 Days (High-Burst)</option>
                   <option value="1 Month (Standard)">1 Month (Standard)</option>
@@ -195,26 +195,26 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Brand / Organization</label>
+                <label className="text-xs font-semibold text-[#4A4E5C]">Brand / Organization</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Acme Corp / Retail Brand"
                   value={brandName}
                   onChange={(e) => setBrandName(e.target.value)}
-                  className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                  className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3 py-2.5 text-xs font-sans text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-[#4A4E5C] font-semibold">Contact Phone / WhatsApp</label>
+                <label className="text-xs font-semibold text-[#4A4E5C]">Contact Phone / WhatsApp</label>
                 <input
                   type="tel"
                   required
                   placeholder="+91 98765 43210"
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
-                  className="w-full bg-[#FAF9F5] border border-black/10 rounded px-3 py-2 text-xs font-mono text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
+                  className="w-full bg-[#F8FAFC] border border-black/10 rounded-xl px-3 py-2.5 text-xs font-mono text-[#0A0B0E] focus:outline-none focus:border-h3d-blue placeholder-black/30"
                 />
               </div>
             </div>

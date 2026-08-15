@@ -10,16 +10,16 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#FAF9F5] text-[#0A0B0E] border-t border-black/[0.08] py-16">
+    <footer className="bg-white text-[#0A0B0E] border-t border-black/[0.06] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 pb-12 border-b border-black/[0.08]">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 pb-12 border-b border-black/[0.06]">
           {/* Logo & Corporate Summary */}
           <div className="space-y-4 max-w-md">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-h3d-blue flex items-center justify-center font-title font-bold text-white tracking-tighter text-base rounded-sm shadow-[0_0_15px_rgba(15,82,255,0.35)]">
+              <div className="w-9 h-9 bg-h3d-blue flex items-center justify-center font-title font-bold text-white tracking-tight text-lg rounded-lg shadow-md shadow-blue-500/20">
                 H3D
               </div>
-              <span className="font-display font-bold text-sm tracking-wider text-[#0A0B0E] uppercase">
+              <span className="font-display font-bold text-base tracking-wide text-[#0A0B0E]">
                 {H3D_DATA.company.name}
               </span>
             </div>
@@ -29,9 +29,9 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Quick Nav Links */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs font-mono">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs font-sans">
             <div className="space-y-3">
-              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">NETWORK</div>
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-bold">MEDIA NETWORK</div>
               <div className="space-y-2">
                 <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">LED Billboards</a></div>
                 <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Large Unipoles</a></div>
@@ -41,22 +41,21 @@ export const Footer: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">TERRITORY</div>
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-bold">PRIME LOCATIONS</div>
               <div className="space-y-2">
                 <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">New Bus Stand</a></div>
                 <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Temple Arterials</a></div>
                 <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Bypass Corridors</a></div>
-                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Feeder Stops</a></div>
+                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Feeder Shelters</a></div>
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">ORGANIZATION</div>
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-bold">HORIZON 3D</div>
               <div className="space-y-2">
                 <div><a href="#municipal" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Civic Value</a></div>
-                <div><a href="#process" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Implementation</a></div>
-                <div><a href="#vision" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Smart Future</a></div>
-                <div><a href="#about" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Manifesto</a></div>
+                <div><a href="#about" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Manifesto & Vision</a></div>
+                <div><a href="#contact" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Campaign Desk</a></div>
               </div>
             </div>
           </div>

@@ -25,9 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCampaignModal }) => {
   const navLinks = [
     { label: "Media Formats", href: "#media" },
     { label: "Locations", href: "#locations" },
-    { label: "Public Spaces", href: "#municipal" },
-    { label: "Our Process", href: "#process" },
-    { label: "Future Vision", href: "#vision" },
+    { label: "Civic Value", href: "#municipal" },
     { label: "About Us", href: "#about" },
     { label: "Contact", href: "#contact" },
   ];
@@ -38,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCampaignModal }) => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md border-b border-black/[0.06] py-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
-            : "bg-gradient-to-b from-[#FAF9F5]/90 via-[#FAF9F5]/60 to-transparent py-5"
+            : "bg-gradient-to-b from-white/90 via-white/60 to-transparent py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
