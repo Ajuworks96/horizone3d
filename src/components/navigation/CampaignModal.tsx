@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { H3D_DATA } from "../../lib/data";
 import { X, Check, ArrowRight, Mail, Phone, Building2, MapPin, Calendar } from "lucide-react";
+import { H3DLogo } from "../brand/H3DLogo";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -83,10 +84,13 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         </button>
 
         {/* Modal Header */}
-        <div className="space-y-2 mb-8 pr-8">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-h3d-blue/10 border border-h3d-blue/30 text-[11px] font-mono text-h3d-blue uppercase tracking-wider font-bold">
-            <span className="w-2 h-2 rounded-full bg-h3d-blue" />
-            <span>Interactive OOH Campaign Planner</span>
+        <div className="space-y-3 mb-8 pr-8">
+          <div className="flex items-center justify-between">
+            <H3DLogo size="sm" variant="horizontal" theme="light" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-h3d-blue/10 text-xs font-semibold text-h3d-blue uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-h3d-blue" />
+              <span>OOH Campaign Planner</span>
+            </div>
           </div>
           <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-[#0A0B0E]">
             PLAN YOUR MUNICIPAL CAMPAIGN

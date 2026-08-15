@@ -3,6 +3,7 @@
 import React from "react";
 import { H3D_DATA } from "../../lib/data";
 import { Compass, Building2 } from "lucide-react";
+import { H3DLogo } from "../brand/H3DLogo";
 
 export const AboutManifesto: React.FC = () => {
   return (
@@ -43,9 +44,7 @@ export const AboutManifesto: React.FC = () => {
 
           {/* Right: Architectural Quote Card */}
           <div className="lg:col-span-5 bg-[#F8FAFC] border border-black/[0.08] rounded-2xl p-8 sm:p-10 space-y-6 shadow-xl relative">
-            <div className="w-10 h-10 rounded-xl bg-h3d-blue/15 flex items-center justify-center text-h3d-blue shadow-sm">
-              <Building2 className="w-5 h-5" />
-            </div>
+            <H3DLogo size="lg" variant="horizontal" theme="light" />
 
             <blockquote className="text-lg sm:text-xl font-display font-bold text-[#0A0B0E] leading-snug">
               &ldquo;{H3D_DATA.manifesto.quote}&rdquo;

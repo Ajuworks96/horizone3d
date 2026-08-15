@@ -169,13 +169,13 @@ export const InteractiveBackground: React.FC = () => {
       {/* Primary Dynamic Luminous Spotlight - Follows Mouse Smoothly */}
       <div
         ref={spotlightRef}
-        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#0F52FF]/20 via-[#6366F1]/15 to-[#06B6D4]/20 blur-[100px] transition-opacity duration-500 will-change-transform"
+        className="absolute top-0 left-0 w-[520px] h-[520px] rounded-full bg-gradient-to-tr from-[#1B6CA8]/25 via-[#00A3E0]/20 to-[#0F3E61]/15 blur-[100px] transition-opacity duration-500 will-change-transform"
       />
 
       {/* Secondary Trailing Chromatic Hue Spotlight */}
       <div
         ref={secondarySpotlightRef}
-        className="absolute top-0 left-0 w-[360px] h-[360px] rounded-full bg-gradient-to-br from-[#A855F7]/25 via-[#3B82F6]/20 to-[#10B981]/15 blur-[80px] transition-opacity duration-700 will-change-transform"
+        className="absolute top-0 left-0 w-[380px] h-[380px] rounded-full bg-gradient-to-br from-[#00A3E0]/25 via-[#1B6CA8]/20 to-[#06B6D4]/15 blur-[85px] transition-opacity duration-700 will-change-transform"
       />
 
       {/* Dynamic Fluid Canvas Trail - Only Draws When Moving Mouse */}

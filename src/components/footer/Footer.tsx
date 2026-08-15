@@ -3,6 +3,7 @@
 import React from "react";
 import { H3D_DATA } from "../../lib/data";
 import { ArrowUp, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { H3DLogo } from "../brand/H3DLogo";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -18,15 +19,8 @@ export const Footer: React.FC = () => {
         {/* Top Header CTA Row */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-16 border-b border-white/10">
           <div className="space-y-3 max-w-xl">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-h3d-blue flex items-center justify-center font-title font-bold text-white tracking-tight text-xl rounded-xl shadow-lg shadow-blue-500/30">
-                H3D
-              </div>
-              <span className="font-display font-bold text-xl tracking-wide text-white uppercase">
-                {H3D_DATA.company.name}
-              </span>
-            </div>
-            <p className="text-sm text-zinc-400 font-sans leading-relaxed">
+            <H3DLogo size="lg" theme="dark" variant="horizontal" />
+            <p className="text-sm text-zinc-400 font-sans leading-relaxed pt-2">
               {H3D_DATA.company.tagline} Transforming public spaces into revenue-generating, beautifully maintained civic media infrastructure across Guruvayur Municipality.
             </p>
           </div>

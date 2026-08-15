@@ -10,9 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         h3d: {
-          blue: "#0F52FF",
-          "blue-glow": "#266BFF",
-          "blue-dark": "#0032A8",
+          blue: "#1B6CA8",
+          "blue-glow": "#00A3E0",
+          "blue-dark": "#0F3E61",
+          "blue-navy": "#0A253A",
           charcoal: "#0A0B0E",
           surface: "#12141A",
           "surface-light": "#191C24",
