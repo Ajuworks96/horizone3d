@@ -100,13 +100,13 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
             </a>
 
             {/* Municipal Hub Territory */}
-            <div className="p-6 rounded-lg bg-white border border-black/[0.08] space-y-2 shadow-sm">
-              <div className="text-xs font-mono text-[#6B7280] font-semibold">OPERATIONAL BASE</div>
+            <div className="p-6 rounded-xl bg-white border border-black/[0.08] space-y-1.5 shadow-sm">
+              <div className="text-xs font-bold text-[#6B7280] uppercase tracking-wider">OPERATIONAL BASE</div>
               <div className="text-base sm:text-lg font-display font-bold text-[#0A0B0E]">
                 Guruvayur Municipality, Kerala
               </div>
-              <div className="text-xs font-mono text-h3d-blue font-bold">
-                COORDINATES: {H3D_DATA.company.coordinates}
+              <div className="text-xs font-medium text-emerald-600 font-sans">
+                Prime Transit & Arterial Media Coverage
               </div>
             </div>
 

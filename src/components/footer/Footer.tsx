@@ -63,14 +63,10 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#6B7280]">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-emerald-600 font-bold">
-              <Radio className="w-3 h-3" />
-              <span>GURUVAYUR HUB ACTIVE</span>
-            </span>
-            <span>•</span>
-            <span>{H3D_DATA.company.coordinates}</span>
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-[#6B7280]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span className="font-semibold text-[#0A0B0E]">Guruvayur Municipal Hub, Kerala</span>
           </div>
 
           <div className="flex items-center gap-6">

@@ -40,7 +40,6 @@ export const H3D_DATA = {
     name: "HORIZON 3D MEDIA CO.",
     shortName: "H3D",
     tagline: "Transforming public spaces with smart advertising.",
-    coordinates: "10.5946° N, 76.0416° E",
     primaryHub: "Guruvayur Municipality",
     email: "horizonoutofhome@gmail.com",
     phone: "+91 99478 34661",
