@@ -7,20 +7,23 @@ interface TrailPoint {
   y: number;
   radius: number;
   alpha: number;
-  color: string;
+  vx: number;
+  vy: number;
+  hue: number;
 }
 
 export const InteractiveBackground: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const orb1Ref = useRef<HTMLDivElement>(null);
-  const orb2Ref = useRef<HTMLDivElement>(null);
-  const orb3Ref = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const secondarySpotlightRef = useRef<HTMLDivElement>(null);
 
-  const mouse = useRef({ x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5 });
-  const rawMouse = useRef({ x: -100, y: -100 });
-  const trail = useRef<TrailPoint[]>([]);
-  const time = useRef(0);
+  const mousePos = useRef({ x: -500, y: -500, targetX: -500, targetY: -500 });
+  const mouseVelocity = useRef(0);
+  const lastMousePos = useRef({ x: -500, y: -500 });
+  const isMoving = useRef(false);
+  const moveTimeout = useRef<NodeJS.Timeout | null>(null);
+  const trailPoints = useRef<TrailPoint[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -41,42 +44,57 @@ export const InteractiveBackground: React.FC = () => {
 
     window.addEventListener("resize", handleResize);
 
-    const colors = [
-      "rgba(15, 82, 255, 0.4)",
-      "rgba(99, 102, 241, 0.4)",
-      "rgba(6, 182, 212, 0.4)",
-      "rgba(168, 85, 247, 0.35)",
-    ];
-
-    let colorIdx = 0;
+    let baseHue = 220; // Starts around Royal Blue (220) to Indigo/Cyan (190-260)
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouse.current.targetX = e.clientX / window.innerWidth;
-      mouse.current.targetY = e.clientY / window.innerHeight;
-      rawMouse.current.x = e.clientX;
-      rawMouse.current.y = e.clientY;
+      const x = e.clientX;
+      const y = e.clientY;
 
-      // Add trail point on movement
-      colorIdx = (colorIdx + 1) % colors.length;
-      trail.current.push({
-        x: e.clientX,
-        y: e.clientY,
-        radius: Math.random() * 25 + 30,
-        alpha: 0.6,
-        color: colors[colorIdx],
-      });
+      // Calculate speed
+      const dx = x - (lastMousePos.current.x === -500 ? x : lastMousePos.current.x);
+      const dy = y - (lastMousePos.current.y === -500 ? y : lastMousePos.current.y);
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      mouseVelocity.current = Math.min(dist * 0.4, 15);
 
-      if (trail.current.length > 35) {
-        trail.current.shift();
+      mousePos.current.targetX = x;
+      mousePos.current.targetY = y;
+      lastMousePos.current = { x, y };
+
+      isMoving.current = true;
+      if (moveTimeout.current) clearTimeout(moveTimeout.current);
+      moveTimeout.current = setTimeout(() => {
+        isMoving.current = false;
+      }, 400);
+
+      // Cycle hues smoothly while moving
+      baseHue = (baseHue + 0.8) % 360;
+      // Keep in vibrant range (Blue, Cyan, Violet, Indigo: 180 to 280)
+      const currentHue = 190 + (baseHue % 90);
+
+      // Spawn fluid glowing particles ONLY on mouse movement
+      if (dist > 2) {
+        trailPoints.current.push({
+          x: x + (Math.random() - 0.5) * 15,
+          y: y + (Math.random() - 0.5) * 15,
+          radius: Math.random() * 20 + 20 + mouseVelocity.current * 2,
+          alpha: Math.min(0.65, 0.3 + mouseVelocity.current * 0.05),
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: (Math.random() - 0.5) * 1.5,
+          hue: currentHue,
+        });
+
+        if (trailPoints.current.length > 40) {
+          trailPoints.current.shift();
+        }
       }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches[0]) {
-        mouse.current.targetX = e.touches[0].clientX / window.innerWidth;
-        mouse.current.targetY = e.touches[0].clientY / window.innerHeight;
-        rawMouse.current.x = e.touches[0].clientX;
-        rawMouse.current.y = e.touches[0].clientY;
+        handleMouseMove({
+          clientX: e.touches[0].clientX,
+          clientY: e.touches[0].clientY,
+        } as MouseEvent);
       }
     };
 
@@ -86,59 +104,49 @@ export const InteractiveBackground: React.FC = () => {
     let animId: number;
 
     const animate = () => {
-      time.current += 0.02;
+      // Smooth lerp for main cursor spotlight position
+      const ease = 0.12;
+      mousePos.current.x += (mousePos.current.targetX - mousePos.current.x) * ease;
+      mousePos.current.y += (mousePos.current.targetY - mousePos.current.y) * ease;
 
-      // Smooth mouse lerp
-      mouse.current.x += (mouse.current.targetX - mouse.current.x) * 0.1;
-      mouse.current.y += (mouse.current.targetY - mouse.current.y) * 0.1;
-
-      const mx = (mouse.current.x - 0.5) * 2;
-      const my = (mouse.current.y - 0.5) * 2;
-
-      // Orb 1: Royal Blue - Tracks mouse with inertia
-      if (orb1Ref.current) {
-        const x = mouse.current.x * 100 + Math.sin(time.current * 0.8) * 10;
-        const y = mouse.current.y * 100 + Math.cos(time.current * 0.8) * 10;
-        orb1Ref.current.style.transform = `translate3d(${x - 50}vw, ${y - 50}vh, 0) scale(${1 + Math.sin(time.current) * 0.15})`;
+      // Update interactive CSS spotlight divs directly under mouse
+      if (spotlightRef.current) {
+        spotlightRef.current.style.transform = `translate3d(${mousePos.current.x - 250}px, ${mousePos.current.y - 250}px, 0)`;
+        spotlightRef.current.style.opacity = isMoving.current ? "0.85" : "0.35";
       }
 
-      // Orb 2: Electric Purple/Violet - Counter orbit
-      if (orb2Ref.current) {
-        const x = (1 - mouse.current.x) * 90 + Math.cos(time.current * 0.9) * 15;
-        const y = (1 - mouse.current.y) * 90 + Math.sin(time.current * 0.9) * 15;
-        orb2Ref.current.style.transform = `translate3d(${x - 45}vw, ${y - 45}vh, 0) scale(${1 + Math.cos(time.current * 1.1) * 0.2})`;
+      if (secondarySpotlightRef.current) {
+        const secEase = 0.06;
+        const sx = mousePos.current.x;
+        const sy = mousePos.current.y;
+        secondarySpotlightRef.current.style.transform = `translate3d(${sx - 180}px, ${sy - 180}px, 0)`;
+        secondarySpotlightRef.current.style.opacity = isMoving.current ? "0.75" : "0.2";
       }
 
-      // Orb 3: Cyan / Turquoise - Fluid center wave
-      if (orb3Ref.current) {
-        const x = 50 + mx * 30 + Math.sin(time.current * 1.2) * 20;
-        const y = 50 + my * 30 + Math.cos(time.current * 0.7) * 20;
-        orb3Ref.current.style.transform = `translate3d(${x - 50}vw, ${y - 50}vh, 0) scale(${1.1 + Math.sin(time.current * 0.9) * 0.15})`;
-      }
-
-      // Draw interactive canvas trail
+      // Draw dynamic fluid trail on canvas
       ctx.clearRect(0, 0, width, height);
 
-      // Render glowing trail
-      for (let i = 0; i < trail.current.length; i++) {
-        const p = trail.current[i];
-        p.alpha *= 0.94;
+      for (let i = 0; i < trailPoints.current.length; i++) {
+        const p = trailPoints.current[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha *= 0.93; // Smooth fade out
         p.radius *= 0.98;
 
         if (p.alpha > 0.01) {
-          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-          grad.addColorStop(0, p.color.replace(/[\d\.]+\)$/, `${p.alpha})`));
-          grad.addColorStop(1, "rgba(15, 82, 255, 0)");
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+          gradient.addColorStop(0, `hsla(${p.hue}, 90%, 55%, ${p.alpha * 0.45})`);
+          gradient.addColorStop(0.5, `hsla(${p.hue + 20}, 85%, 60%, ${p.alpha * 0.25})`);
+          gradient.addColorStop(1, `hsla(${p.hue}, 90%, 55%, 0)`);
 
-          ctx.fillStyle = grad;
+          ctx.fillStyle = gradient;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fill();
         }
       }
 
-      // Filter dead points
-      trail.current = trail.current.filter((p) => p.alpha > 0.02);
+      trailPoints.current = trailPoints.current.filter((p) => p.alpha > 0.015);
 
       animId = requestAnimationFrame(animate);
     };
@@ -150,42 +158,31 @@ export const InteractiveBackground: React.FC = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       cancelAnimationFrame(animId);
+      if (moveTimeout.current) clearTimeout(moveTimeout.current);
     };
   }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#FAFBFF]">
-      {/* Background Animated Chromatic Mesh Layer */}
-      <div className="absolute inset-0 opacity-80 filter blur-[90px] sm:blur-[130px] will-change-transform">
-        {/* Orb 1: Royal Blue / Ultra Blue */}
-        <div
-          ref={orb1Ref}
-          className="absolute top-1/2 left-1/2 -mt-[350px] -ml-[350px] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-[#0F52FF] via-[#3B82F6] to-[#60A5FA] opacity-60 mix-blend-multiply"
-        />
-
-        {/* Orb 2: Electric Purple / Indigo */}
-        <div
-          ref={orb2Ref}
-          className="absolute top-1/2 left-1/2 -mt-[320px] -ml-[320px] w-[650px] h-[650px] rounded-full bg-gradient-to-br from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] opacity-55 mix-blend-multiply"
-        />
-
-        {/* Orb 3: Radiant Cyan / Turquoise */}
-        <div
-          ref={orb3Ref}
-          className="absolute top-1/2 left-1/2 -mt-[300px] -ml-[300px] w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-[#06B6D4] via-[#0EA5E9] to-[#38BDF8] opacity-55 mix-blend-multiply"
-        />
-      </div>
-
-      {/* Interactive Mouse Trail Dynamic Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none filter blur-[20px] mix-blend-multiply opacity-90"
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-white">
+      {/* Primary Dynamic Luminous Spotlight - Follows Mouse Smoothly */}
+      <div
+        ref={spotlightRef}
+        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#0F52FF]/20 via-[#6366F1]/15 to-[#06B6D4]/20 blur-[100px] transition-opacity duration-500 will-change-transform"
       />
 
-      {/* Subtle White Frosting Overlay to keep content cards ultra-crisp */}
-      <div className="absolute inset-0 bg-white/30 backdrop-blur-[30px]" />
+      {/* Secondary Trailing Chromatic Hue Spotlight */}
+      <div
+        ref={secondarySpotlightRef}
+        className="absolute top-0 left-0 w-[360px] h-[360px] rounded-full bg-gradient-to-br from-[#A855F7]/25 via-[#3B82F6]/20 to-[#10B981]/15 blur-[80px] transition-opacity duration-700 will-change-transform"
+      />
+
+      {/* Dynamic Fluid Canvas Trail - Only Draws When Moving Mouse */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none filter blur-[15px]"
+      />
     </div>
   );
 };
