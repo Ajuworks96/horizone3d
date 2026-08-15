@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { H3D_DATA } from "../../lib/data";
-import { X, Check, ArrowRight, Mail, Phone, Building2, MapPin, Calendar, Sparkles } from "lucide-react";
+import { X, Check, ArrowRight, Mail, Phone, Building2, MapPin, Calendar } from "lucide-react";
 
 interface CampaignModalProps {
   isOpen: boolean;
@@ -60,6 +60,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
       `- Brand / Organization: ${brandName || "Not specified"}\n` +
       `- Contact Person: ${contactName || "Not specified"}\n` +
       `- Phone: ${contactPhone || "Not specified"}\n` +
+      `- Email: ${contactEmail || "Not specified"}\n` +
       `- Selected Media Formats: ${formatNames}\n` +
       `- Target Municipal Zone: ${selectedZone}\n` +
       `- Campaign Duration: ${duration}\n\n` +
@@ -70,12 +71,12 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white border border-black/10 rounded-lg p-6 sm:p-8 text-[#0A0B0E] shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl border border-black/10 p-6 sm:p-10">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-black/5 hover:bg-black/10 text-[#4A4E5C] hover:text-[#0A0B0E] transition-colors"
+          className="absolute top-6 right-6 p-2 rounded-md text-[#6B7280] hover:text-[#0A0B0E] hover:bg-black/5 transition-colors"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -84,7 +85,7 @@ export const CampaignModal: React.FC<CampaignModalProps> = ({
         {/* Modal Header */}
         <div className="space-y-2 mb-8 pr-8">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-h3d-blue/10 border border-h3d-blue/30 text-[11px] font-mono text-h3d-blue uppercase tracking-wider font-bold">
-            <Sparkles className="w-3 h-3" />
+            <span className="w-2 h-2 rounded-full bg-h3d-blue" />
             <span>Interactive OOH Campaign Planner</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-[#0A0B0E]">

@@ -3,10 +3,10 @@
 import React from "react";
 import Image from "next/image";
 import { H3D_DATA } from "../../lib/data";
-import { Cpu, Compass, Wifi, Radio, Sparkles } from "lucide-react";
+import { Cpu, Compass, Wifi, Radio, Zap } from "lucide-react";
 
 export const FutureCity: React.FC = () => {
-  const visionIcons = [Sparkles, Wifi, Radio, Compass];
+  const visionIcons = [Zap, Wifi, Radio, Compass];
 
   return (
     <section id="vision" className="relative bg-[#FAF9F5] py-24 sm:py-32 border-t border-black/[0.08] overflow-hidden">

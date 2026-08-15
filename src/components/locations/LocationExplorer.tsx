@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { H3D_DATA, MunicipalLocation } from "../../lib/data";
-import { MapPin, ArrowRight, Sparkles, Users, Clock, CheckCircle2, ChevronRight } from "lucide-react";
+import { MapPin, ArrowRight, Users, Clock, CheckCircle2, ChevronRight } from "lucide-react";
 
 interface LocationExplorerProps {
   onSelectLocation: (locationName: string) => void;
@@ -25,7 +25,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.08]">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-h3d-blue/10 text-xs font-semibold text-h3d-blue uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
+              <MapPin className="w-3.5 h-3.5" />
               <span>Prime Strategic Network</span>
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-[#0A0B0E] uppercase leading-[1.05]">

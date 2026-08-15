@@ -2,7 +2,7 @@
 
 import React from "react";
 import { H3D_DATA } from "../../lib/data";
-import { Compass, Sparkles, Building2 } from "lucide-react";
+import { Compass, Building2 } from "lucide-react";
 
 export const AboutManifesto: React.FC = () => {
   return (
@@ -47,7 +47,7 @@ export const AboutManifesto: React.FC = () => {
           {/* Right: Architectural Quote Card */}
           <div className="lg:col-span-5 bg-[#FAF9F5] border border-black/[0.08] rounded-lg p-8 sm:p-10 space-y-6 shadow-md relative">
             <div className="w-8 h-8 rounded bg-h3d-blue/15 flex items-center justify-center text-h3d-blue">
-              <Sparkles className="w-4 h-4" />
+              <Building2 className="w-4 h-4" />
             </div>
 
             <blockquote className="text-lg sm:text-xl font-display font-bold text-[#0A0B0E] leading-snug">

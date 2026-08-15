@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { H3D_DATA } from "../../lib/data";
-import { Mail, Phone, MapPin, ArrowUpRight, Send, Check, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight, Send, Check } from "lucide-react";
 
 interface ContactExperienceProps {
   onOpenCampaignModal: () => void;
@@ -45,7 +45,7 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
         {/* Master Call to Action Statement */}
         <div className="max-w-4xl mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-black/[0.04] border border-black/[0.08] text-[11px] font-mono text-h3d-blue uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" />
+            <span className="w-2 h-2 rounded-full bg-h3d-blue" />
             <span>OPERATIONS & CAMPAIGN DESK</span>
           </div>
 

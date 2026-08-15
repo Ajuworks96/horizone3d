@@ -9,7 +9,7 @@ import {
   Maximize2,
   Clock,
   MapPin,
-  Sparkles,
+  Layers,
   ArrowRight,
   ShieldCheck,
   Zap,
@@ -36,7 +36,7 @@ export const MediaExperience: React.FC<MediaExperienceProps> = ({ onSelectFormat
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.08]">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-black/[0.04] border border-black/[0.08] text-[11px] font-mono text-h3d-blue uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Layers className="w-3.5 h-3.5" />
               <span>SPATIAL FORMAT EXPLORER</span>
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-[#0A0B0E] uppercase leading-[1.05]">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, MoveRight, Layers, Sparkles, Navigation } from "lucide-react";
+import { ArrowRight, MoveRight, Layers, Navigation } from "lucide-react";
 
 export const CityCanvasStory: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { H3D_DATA } from "../../lib/data";
-import { ArrowDown, ArrowRight, Eye, Play, Pause, Volume2, VolumeX, Sparkles, MonitorPlay } from "lucide-react";
+import { ArrowDown, ArrowRight, Eye, Play, Pause, Volume2, VolumeX, MonitorPlay } from "lucide-react";
 
 interface HeroSceneProps {
   onOpenCampaignModal: () => void;
@@ -145,7 +145,7 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/[0.08] pb-8">
           <div className="space-y-3 max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/[0.04] border border-black/[0.08] text-xs font-mono tracking-widest text-h3d-blue uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-h3d-blue animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-h3d-blue animate-pulse" />
               <span className="font-semibold">{H3D_DATA.heroSequence.badge}</span>
               <span className="text-black/30">•</span>
               <span className="text-[#4A4E5C]">GURUVAYUR HUB</span>
