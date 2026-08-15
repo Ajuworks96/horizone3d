@@ -1,0 +1,91 @@
+"use client";
+
+import React from "react";
+import { H3D_DATA } from "../../lib/data";
+import { ArrowUp, Radio } from "lucide-react";
+
+export const Footer: React.FC = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="bg-[#FAF9F5] text-[#0A0B0E] border-t border-black/[0.08] py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 pb-12 border-b border-black/[0.08]">
+          {/* Logo & Corporate Summary */}
+          <div className="space-y-4 max-w-md">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-h3d-blue flex items-center justify-center font-title font-bold text-white tracking-tighter text-base rounded-sm shadow-[0_0_15px_rgba(15,82,255,0.35)]">
+                H3D
+              </div>
+              <span className="font-display font-bold text-sm tracking-wider text-[#0A0B0E] uppercase">
+                {H3D_DATA.company.name}
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#4A4E5C] font-sans leading-relaxed">
+              {H3D_DATA.company.tagline} Operating premier outdoor advertising infrastructure, transit shelters, and high-brightness digital screens across Guruvayur Municipality.
+            </p>
+          </div>
+
+          {/* Quick Nav Links */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs font-mono">
+            <div className="space-y-3">
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">NETWORK</div>
+              <div className="space-y-2">
+                <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">LED Billboards</a></div>
+                <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Large Unipoles</a></div>
+                <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Transit Shelters</a></div>
+                <div><a href="#media" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Waiting Benches</a></div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">TERRITORY</div>
+              <div className="space-y-2">
+                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">New Bus Stand</a></div>
+                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Temple Arterials</a></div>
+                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Bypass Corridors</a></div>
+                <div><a href="#locations" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Feeder Stops</a></div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="text-[#6B7280] uppercase tracking-wider text-[10px] font-semibold">ORGANIZATION</div>
+              <div className="space-y-2">
+                <div><a href="#municipal" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Civic Value</a></div>
+                <div><a href="#process" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Implementation</a></div>
+                <div><a href="#vision" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Smart Future</a></div>
+                <div><a href="#about" className="text-[#4A4E5C] hover:text-h3d-blue transition-colors">Manifesto</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#6B7280]">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-emerald-600 font-bold">
+              <Radio className="w-3 h-3" />
+              <span>GURUVAYUR HUB ACTIVE</span>
+            </span>
+            <span>•</span>
+            <span>{H3D_DATA.company.coordinates}</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <span>© {new Date().getFullYear()} Horizon 3D Media Co. All rights reserved.</span>
+            <button
+              onClick={scrollToTop}
+              className="p-2 rounded bg-white hover:bg-black/5 text-[#0A0B0E] border border-black/10 transition-colors flex items-center gap-1 shadow-sm"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="w-3.5 h-3.5" />
+              <span className="text-[10px] font-bold">TOP</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
