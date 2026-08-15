@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { H3D_DATA } from "../../lib/data";
-import { ArrowDown, ArrowRight, Eye, Layers, Compass, Radio } from "lucide-react";
+import { ArrowDown, ArrowRight, Eye, Play, Pause, Volume2, VolumeX, Sparkles, MonitorPlay } from "lucide-react";
 
 interface HeroSceneProps {
   onOpenCampaignModal: () => void;
@@ -11,50 +11,92 @@ interface HeroSceneProps {
 
 export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [activeAdIndex, setActiveAdIndex] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const [activeMode, setActiveMode] = useState<"visual" | "video">("visual");
 
-  // High-impact ads rotating inside the physical billboard screen
+  // Real, high-impact ad campaigns showcasing real OOH visuals
   const billboardAds = [
     {
-      tag: "HORIZON 3D MEDIA",
-      main: "WE TURN PUBLIC SPACE INTO MEDIA.",
-      sub: "Guruvayur Municipality • High-Impact OOH Infrastructure",
-      theme: "from-blue-900 via-[#0B1736] to-[#060D1E]",
-      accent: "#0F52FF",
+      id: "anamorphic",
+      tag: "3D ANAMORPHIC DISPLAY",
+      client: "HORIZON 3D • IMMERSIVE OOH",
+      headline: "NEXT-GEN 3D EXPERIENCES",
+      sub: "Curved Architectural LED • High-Impact Optical Illusion",
+      image: "/images/led-screen.jpg",
+      badge: "8K UHD • 10,000 NITS",
+      glowColor: "rgba(255, 100, 50, 0.45)",
     },
     {
-      tag: "DIGITAL TRANSIT NETWORK",
-      main: "CAPTURING ATTENTION WHERE PEOPLE MOVE.",
-      sub: "New Bus Stand Terminal • Strategic Arterial Billboards",
-      theme: "from-indigo-950 via-[#0F1428] to-[#080B16]",
-      accent: "#3B82F6",
+      id: "unipole",
+      tag: "HIGHWAY ARTERIAL UNIPOLE",
+      client: "AUTOMOTIVE & LUXURY CAMPAIGNS",
+      headline: "CAPTURING MILLIONS ON THE MOVE",
+      sub: "Guruvayur Highway Arterial Corridor • 24/7 Illumination",
+      image: "/images/hero-billboard.jpg",
+      badge: "PRIME CORRIDOR • 150K+ DAILY REACH",
+      glowColor: "rgba(15, 82, 255, 0.4)",
     },
     {
-      tag: "SMART PUBLIC SPACES",
-      main: "ENGINEERING URBAN CIVIC EXCELLENCE.",
-      sub: "High-Nit LED Billboards • Modern Shelter Branding",
-      theme: "from-slate-900 via-[#121622] to-[#0A0D14]",
-      accent: "#60A5FA",
+      id: "smart-totem",
+      tag: "DIGITAL TRANSIT HUB",
+      client: "GURUVAYUR CIVIC NETWORK",
+      headline: "SMART CIVIC MEDIA INFRASTRUCTURE",
+      sub: "Interactive Pedestrian Totems • Real-Time Passenger Information",
+      image: "/images/smart-totem.jpg",
+      badge: "CENTRAL BUS TERMINAL • HIGH FOOTFALL",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+    },
+    {
+      id: "shelter",
+      tag: "PREMIUM TRANSIT SHELTER",
+      client: "URBAN STREET-LEVEL BRANDING",
+      headline: "POINT-OF-DECISION IMPACT",
+      sub: "High-Visibility Street Pillars • Integrated Urban Furniture",
+      image: "/images/transit-shelter.jpg",
+      badge: "PEDESTRIAN EYE-LEVEL DOMINANCE",
+      glowColor: "rgba(168, 85, 247, 0.4)",
     },
   ];
 
-  // Rotate billboard advertisement simulation every 5 seconds
+  // Auto-rotate ad slides if on visual mode
   useEffect(() => {
+    if (activeMode !== "visual") return;
     const timer = setInterval(() => {
       setActiveAdIndex((prev) => (prev + 1) % billboardAds.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [billboardAds.length]);
+  }, [activeMode, billboardAds.length]);
+
+  // Handle video play/pause
+  const toggleVideoPlay = () => {
+    if (!videoRef.current) return;
+    if (isVideoPlaying) {
+      videoRef.current.pause();
+      setIsVideoPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsVideoPlaying(true);
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
 
   // Handle subtle mouse parallax
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const { clientWidth, clientHeight } = containerRef.current;
-      const x = (e.clientX / clientWidth - 0.5) * 2; // -1 to 1
-      const y = (e.clientY / clientHeight - 0.5) * 2; // -1 to 1
+      const x = (e.clientX / clientWidth - 0.5) * 2;
+      const y = (e.clientY / clientHeight - 0.5) * 2;
       setMousePos({ x, y });
     };
 
@@ -75,10 +117,10 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
 
   // Parallax calculations
   const bgTranslateY = scrollY * 0.15;
-  const billboardScale = Math.min(1 + scrollY * 0.0004, 1.25);
-  const billboardTranslateY = -scrollY * 0.25;
-  const mouseRotateX = -mousePos.y * 3;
-  const mouseRotateY = mousePos.x * 4;
+  const billboardScale = Math.min(1 + scrollY * 0.0004, 1.2);
+  const billboardTranslateY = -scrollY * 0.2;
+  const mouseRotateX = -mousePos.y * 2.5;
+  const mouseRotateY = mousePos.x * 3.5;
 
   return (
     <section
@@ -86,7 +128,7 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
       className="relative min-h-[115vh] w-full overflow-hidden bg-[#FAF9F5] flex flex-col justify-between pt-24 md:pt-32 pb-16"
       style={{ perspective: "1200px" }}
     >
-      {/* LAYER 0: Background Clean Architectural Grid & Ambient Light */}
+      {/* Background Architectural Grid & Ambient Light */}
       <div
         className="absolute inset-0 pointer-events-none transition-transform duration-75 ease-out"
         style={{
@@ -103,10 +145,10 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/[0.08] pb-8">
           <div className="space-y-3 max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/[0.04] border border-black/[0.08] text-xs font-mono tracking-widest text-h3d-blue uppercase">
-              <Radio className="w-3.5 h-3.5 animate-pulse text-h3d-blue" />
+              <Sparkles className="w-3.5 h-3.5 text-h3d-blue animate-pulse" />
               <span className="font-semibold">{H3D_DATA.heroSequence.badge}</span>
               <span className="text-black/30">•</span>
-              <span className="text-[#4A4E5C]">GURUVAYUR TERRITORY</span>
+              <span className="text-[#4A4E5C]">GURUVAYUR HUB</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-[#0A0B0E] uppercase leading-[1.02]">
@@ -124,14 +166,14 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
             <div className="flex items-center gap-3">
               <button
                 onClick={onOpenCampaignModal}
-                className="px-5 py-2.5 bg-h3d-blue hover:bg-blue-600 text-white rounded text-xs font-mono font-semibold tracking-wider flex items-center gap-2 shadow-[0_0_20px_rgba(15,82,255,0.3)] transition-all"
+                className="px-5 py-2.5 bg-h3d-blue hover:bg-blue-600 text-white rounded-lg text-xs font-mono font-semibold tracking-wider flex items-center gap-2 shadow-[0_0_20px_rgba(15,82,255,0.3)] transition-all"
               >
                 <span>EXPLORE MEDIA SPACES</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <a
                 href="#canvas-story"
-                className="px-4 py-2.5 bg-white hover:bg-black/5 border border-black/10 text-[#0A0B0E] rounded text-xs font-mono tracking-wider transition-all"
+                className="px-4 py-2.5 bg-white hover:bg-black/5 border border-black/10 text-[#0A0B0E] rounded-lg text-xs font-mono tracking-wider transition-all"
               >
                 THE PHILOSOPHY ↓
               </a>
@@ -140,7 +182,7 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
         </div>
       </div>
 
-      {/* LAYER 1 & 2: THE PHYSICAL BILLBOARD & 3D INTERACTIVE SCENE */}
+      {/* THE PHYSICAL BILLBOARD & 3D REALISTIC SCREEN */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 w-full my-8 md:my-12">
         <div
           className="relative transition-transform duration-300 ease-out will-change-transform"
@@ -153,13 +195,10 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
           <div className="flex justify-around px-12 -mb-2 relative z-30 pointer-events-none">
             {[0, 1, 2, 3].map((lamp) => (
               <div key={lamp} className="flex flex-col items-center">
-                {/* Structural Stanchion arm */}
                 <div className="w-1.5 h-6 bg-zinc-600 rounded-t-sm shadow-sm" />
-                {/* Lamp fixture */}
                 <div className="w-8 h-3 bg-zinc-800 rounded-sm border border-zinc-600 flex items-center justify-center">
                   <div className="w-6 h-1.5 bg-amber-100 rounded-full shadow-[0_0_12px_rgba(255,245,200,0.9)]" />
                 </div>
-                {/* Projected light cone */}
                 <div
                   className="w-20 h-24 bg-gradient-to-b from-amber-100/20 via-blue-400/5 to-transparent blur-sm -mt-0.5"
                   style={{
@@ -171,105 +210,212 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
           </div>
 
           {/* Master Heavy-Duty Billboard Steel Frame */}
-          <div className="relative bg-[#111319] border-4 border-zinc-800 rounded-md p-3 sm:p-4 shadow-2xl billboard-light-shadow">
-            {/* Top Brand Plate */}
-            <div className="flex items-center justify-between px-3 py-1.5 mb-2 bg-[#090B10] border border-white/10 rounded text-[10px] font-mono text-white/70">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="font-bold text-white tracking-widest uppercase">H3D DISPLAY UNIT 01</span>
+          <div
+            className="relative bg-[#0d0f14] border-4 border-zinc-800 rounded-xl p-3 sm:p-4 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)] transition-shadow duration-500"
+            style={{
+              boxShadow: `0 20px 60px -10px ${currentAd.glowColor}, 0 0 30px rgba(0,0,0,0.8)`,
+            }}
+          >
+            {/* Top Display Status Bar & Mode Switcher */}
+            <div className="flex items-center justify-between px-3 py-1.5 mb-2 bg-[#06080c] border border-white/10 rounded-lg text-[11px] font-mono text-white/80">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                <span className="font-bold text-white tracking-widest uppercase">
+                  H3D DIGITAL DISPLAY 01
+                </span>
+                <span className="hidden md:inline text-zinc-500">|</span>
+                <span className="hidden md:inline text-xs text-zinc-400 font-sans">
+                  {activeMode === "video" ? "4K Video Stream" : currentAd.client}
+                </span>
               </div>
-              <span className="hidden sm:inline text-zinc-400">HIGHWAY ARTERIAL UNIPOLE • HIGH-NIT DIGITAL SIMULATION</span>
-              <div className="flex items-center gap-1.5 text-h3d-blue font-semibold">
-                <Compass className="w-3 h-3" />
-                <span>GURUVAYUR HUB</span>
+
+              {/* Toggle Between Real Visual Ads & Video Stream */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setActiveMode("visual")}
+                  className={`px-2.5 py-1 rounded text-[10px] font-mono transition-all ${
+                    activeMode === "visual"
+                      ? "bg-h3d-blue text-white font-bold shadow-sm"
+                      : "text-zinc-400 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  3D AD REEL
+                </button>
+                <button
+                  onClick={() => setActiveMode("video")}
+                  className={`px-2.5 py-1 rounded text-[10px] font-mono flex items-center gap-1 transition-all ${
+                    activeMode === "video"
+                      ? "bg-emerald-500 text-white font-bold shadow-sm"
+                      : "text-zinc-400 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  <MonitorPlay className="w-3 h-3" />
+                  <span>MOTION VIDEO</span>
+                </button>
               </div>
             </div>
 
             {/* Active High-Definition Billboard Screen Area */}
-            <div className="relative aspect-[16/8.5] sm:aspect-[16/8] rounded overflow-hidden bg-black border border-white/10 group">
-              {/* Underlying Realistic OOH Photograph Layer */}
-              <Image
-                src="/images/hero-billboard.jpg"
-                alt="Horizon 3D Media Billboard Structure"
-                fill
-                priority
-                className="object-cover opacity-35 mix-blend-luminosity scale-105 group-hover:scale-100 transition-transform duration-1000"
-              />
-
-              {/* Dynamic Ad Display Content with Atmospheric LED Texture */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${currentAd.theme} p-6 sm:p-10 md:p-14 flex flex-col justify-between transition-all duration-700 text-white`}>
-                {/* Screen Scanlines and Dot-Pitch Mesh */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80 pointer-events-none" />
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] pointer-events-none opacity-40" />
-
-                {/* Ad Content Top Meta */}
-                <div className="relative z-10 flex items-center justify-between">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-black/50 backdrop-blur-md border border-white/20 text-[10px] sm:text-xs font-mono text-white tracking-widest uppercase">
-                    <span className="w-1.5 h-1.5 rounded-full bg-h3d-blue" />
-                    {currentAd.tag}
-                  </div>
-                  <div className="text-[10px] sm:text-xs font-mono text-white/60 tracking-wider">
-                    BROADCAST 0{activeAdIndex + 1} / 0{billboardAds.length}
-                  </div>
-                </div>
-
-                {/* Ad Master Typography Headline */}
-                <div className="relative z-10 my-auto space-y-2 sm:space-y-4 max-w-2xl">
-                  <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tight text-white uppercase leading-[1.08] drop-shadow-md">
-                    {currentAd.main}
-                  </h2>
-                  <p className="text-xs sm:text-sm font-mono text-white/90 tracking-wide">
-                    {currentAd.sub}
-                  </p>
-                </div>
-
-                {/* Screen Bottom Controls & Interactive Triggers */}
-                <div className="relative z-10 flex items-center justify-between border-t border-white/15 pt-3 sm:pt-4">
-                  <div className="flex items-center gap-2">
-                    {billboardAds.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setActiveAdIndex(i)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                          activeAdIndex === i ? "w-8 bg-h3d-blue" : "w-2 bg-white/30 hover:bg-white/60"
-                        }`}
-                        aria-label={`Show Ad Slide ${i + 1}`}
+            <div className="relative aspect-[16/8.5] sm:aspect-[16/8] rounded-lg overflow-hidden bg-black border border-white/15 group shadow-inner">
+              {/* MODE 1: Photorealistic 3D Billboard Ad Visual Reel */}
+              {activeMode === "visual" && (
+                <>
+                  {billboardAds.map((ad, idx) => (
+                    <div
+                      key={ad.id}
+                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                        activeAdIndex === idx ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
+                      }`}
+                    >
+                      <Image
+                        src={ad.image}
+                        alt={ad.headline}
+                        fill
+                        priority={idx === 0}
+                        className="object-cover scale-100 group-hover:scale-105 transition-transform duration-1000"
                       />
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/70">
-                    <Eye className="w-3.5 h-3.5 text-h3d-blue" />
-                    <span>PUBLIC IMPACT VIEW</span>
+
+                      {/* Cinematic Lighting Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/40" />
+
+                      {/* High-Impact Commercial Overlay Content */}
+                      <div className="absolute inset-0 p-6 sm:p-8 md:p-12 flex flex-col justify-between text-white">
+                        {/* Top Metadata */}
+                        <div className="flex items-center justify-between">
+                          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] sm:text-xs font-mono tracking-wider text-white">
+                            <span className="w-2 h-2 rounded-full bg-h3d-blue animate-ping" />
+                            <span className="font-bold">{ad.tag}</span>
+                          </div>
+
+                          <div className="px-2.5 py-1 rounded bg-white/10 backdrop-blur-md border border-white/15 text-[10px] sm:text-xs font-mono text-zinc-200">
+                            {ad.badge}
+                          </div>
+                        </div>
+
+                        {/* Middle Headline */}
+                        <div className="my-auto space-y-2 sm:space-y-3 max-w-2xl">
+                          <div className="text-xs sm:text-sm font-mono tracking-widest text-blue-400 uppercase font-semibold">
+                            {ad.client}
+                          </div>
+                          <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tight text-white uppercase leading-[1.08] drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                            {ad.headline}
+                          </h2>
+                          <p className="text-xs sm:text-sm font-sans text-zinc-200 line-clamp-2 max-w-xl">
+                            {ad.sub}
+                          </p>
+                        </div>
+
+                        {/* Bottom Slide Indicators */}
+                        <div className="flex items-center justify-between border-t border-white/20 pt-3">
+                          <div className="flex items-center gap-2">
+                            {billboardAds.map((_, i) => (
+                              <button
+                                key={i}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActiveAdIndex(i);
+                                }}
+                                className={`h-2 rounded-full transition-all duration-300 ${
+                                  activeAdIndex === i ? "w-8 bg-h3d-blue shadow-[0_0_10px_#0F52FF]" : "w-2 bg-white/40 hover:bg-white/80"
+                                }`}
+                                aria-label={`Select Ad ${i + 1}`}
+                              />
+                            ))}
+                          </div>
+
+                          <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-300">
+                            <Eye className="w-3.5 h-3.5 text-h3d-blue" />
+                            <span>LIVE OOH BROADCAST</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+
+              {/* MODE 2: Real Motion Video Stream */}
+              {activeMode === "video" && (
+                <div className="absolute inset-0 z-10 bg-black flex items-center justify-center">
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    className="w-full h-full object-cover"
+                    src="https://vjs.zencdn.net/v/oceans.mp4"
+                  />
+
+                  {/* Video Screen HUD & Controls */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 p-6 flex flex-col justify-between pointer-events-none">
+                    <div className="flex items-center justify-between">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/80 backdrop-blur-md text-white text-[11px] font-mono font-bold tracking-wider uppercase">
+                        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                        <span>LIVE 4K CINEMATIC STREAM</span>
+                      </div>
+                      <div className="text-xs font-mono text-white/80">
+                        1080P • 60 FPS • DIGITAL FEED
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-white/20 pt-3 pointer-events-auto">
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={toggleVideoPlay}
+                          className="p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-colors"
+                          title={isVideoPlaying ? "Pause Video" : "Play Video"}
+                        >
+                          {isVideoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                        </button>
+                        <button
+                          onClick={toggleMute}
+                          className="p-2 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-colors"
+                          title={isMuted ? "Unmute" : "Mute"}
+                        >
+                          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                        </button>
+                      </div>
+
+                      <div className="text-xs font-mono text-white/90">
+                        HORIZON 3D DIGITAL AD ENGINE
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
+
+              {/* Realistic LED Dot Matrix / Scanline Texture Over Screen */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/20 to-black/60 pointer-events-none z-20" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_3px] pointer-events-none opacity-30 z-20" />
             </div>
 
-            {/* Industrial Catwalk & Steel Truss Below Billboard */}
-            <div className="mt-2 pt-2 border-t border-zinc-800 flex items-center justify-between text-[9px] font-mono text-zinc-400 px-2">
-              <span>H3D MONOLITHIC UNIPOLE SYSTEM</span>
-              <span className="hidden sm:inline">HIGH-NIT SURFACE • STRUCTURAL STEEL BASE</span>
-              <span>SITE ID: H3D-GVY-001</span>
+            {/* Industrial Bottom Truss Info */}
+            <div className="mt-2 pt-2 border-t border-zinc-800 flex items-center justify-between text-[10px] font-mono text-zinc-400 px-2">
+              <span className="text-zinc-300 font-semibold">H3D SMART MONOLITHIC DISPLAY</span>
+              <span className="hidden sm:inline">HIGH-NIT SURFACE • STRUCTURAL STEEL MAST</span>
+              <span className="text-h3d-blue font-bold">SITE: GURUVAYUR-001</span>
             </div>
           </div>
 
-          {/* Structural Pillar Base Stanchion */}
+          {/* Heavy Steel Structural Base */}
           <div className="w-16 sm:w-24 h-12 bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-950 mx-auto border-x-2 border-zinc-600 shadow-xl relative">
             <div className="absolute inset-0 bg-grid-pattern opacity-30" />
           </div>
         </div>
       </div>
 
-      {/* LAYER 3: Bottom Telemetry Bar & Scroll Cue */}
+      {/* LAYER 3: Strategic Stats Bar */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-md bg-white border border-black/[0.08] shadow-sm text-xs font-mono">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-white border border-black/[0.08] shadow-sm text-xs font-mono">
           <div>
             <div className="text-[#6B7280] text-[10px] uppercase">STRATEGIC HUB</div>
             <div className="text-[#0A0B0E] font-bold mt-0.5">Guruvayur Municipality</div>
           </div>
           <div>
-            <div className="text-[#6B7280] text-[10px] uppercase">CORE POSITIONING</div>
-            <div className="text-h3d-blue font-bold mt-0.5">Smart Public Advertising</div>
+            <div className="text-[#6B7280] text-[10px] uppercase">CORE CAPABILITY</div>
+            <div className="text-h3d-blue font-bold mt-0.5">3D & Digital Billboard Media</div>
           </div>
           <div>
             <div className="text-[#6B7280] text-[10px] uppercase">MEDIA REACH</div>
@@ -277,8 +423,8 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-[#6B7280] text-[10px] uppercase">SCROLL TO ENTER</div>
-              <div className="text-[#0A0B0E] font-medium mt-0.5">The City as Canvas</div>
+              <div className="text-[#6B7280] text-[10px] uppercase">SCROLL TO EXPLORE</div>
+              <div className="text-[#0A0B0E] font-medium mt-0.5">City As Canvas</div>
             </div>
             <ArrowDown className="w-4 h-4 text-h3d-blue animate-bounce" />
           </div>
@@ -287,3 +433,4 @@ export const HeroScene: React.FC<HeroSceneProps> = ({ onOpenCampaignModal }) => 
     </section>
   );
 };
+
