@@ -36,7 +36,7 @@ export const ContactExperience: React.FC<ContactExperienceProps> = ({ onOpenCamp
   };
 
   return (
-    <section id="contact" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
+    <section id="contact" className="relative bg-transparent py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Master Call to Action Statement */}
         <div className="max-w-4xl mb-16 space-y-4">

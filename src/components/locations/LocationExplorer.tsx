@@ -16,7 +16,7 @@ export const LocationExplorer: React.FC<LocationExplorerProps> = ({ onSelectLoca
     H3D_DATA.locations.find((l) => l.id === selectedLocId) || H3D_DATA.locations[0];
 
   return (
-    <section id="locations" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
+    <section id="locations" className="relative bg-transparent py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.06]">

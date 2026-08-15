@@ -12,7 +12,7 @@ export const PublicSpaceValue: React.FC<PublicSpaceValueProps> = ({ onOpenCampai
   const icons = [Landmark, TrendingUp, Users, SunMedium];
 
   return (
-    <section id="municipal" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
+    <section id="municipal" className="relative bg-transparent py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 pb-8 border-b border-black/[0.06]">

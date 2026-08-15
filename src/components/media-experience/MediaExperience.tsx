@@ -27,7 +27,7 @@ export const MediaExperience: React.FC<MediaExperienceProps> = ({ onSelectFormat
     H3D_DATA.mediaFormats.find((f) => f.id === selectedFormatId) || H3D_DATA.mediaFormats[0];
 
   return (
-    <section id="media" className="relative bg-white py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
+    <section id="media" className="relative bg-transparent py-24 sm:py-32 border-t border-black/[0.06] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 pb-8 border-b border-black/[0.06]">
