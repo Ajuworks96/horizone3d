@@ -49,7 +49,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-white text-[#0A0B0E] selection:bg-h3d-blue selection:text-white overflow-hidden">
+    <main className="relative min-h-screen bg-white text-[#0A0B0E] selection:bg-h3d-blue selection:text-white">
       {/* Premium Interactive Ambient Mouse Background Animation */}
       <InteractiveBackground />
 
